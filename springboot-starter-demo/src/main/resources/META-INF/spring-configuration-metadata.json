@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "spring.user.name",
+      "type":"java.lang.String",
+      "defaultValue": "ljt"
+    },
+    {
+      "name": "spring.user.enabled",
+      "type": "java.lang.Boolean",
+      "defaultValue": false
+    }
+  ]
+}

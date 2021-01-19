@@ -1,6 +1,8 @@
 package com.lg.springcloud.study.controller;
 
 import com.lg.springcloud.study.dto.User;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,11 @@ public class UserController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @HystrixCommand(commandKey="getUser", groupKey="user", fallbackMethod = "fallback", threadPoolKey ="tpk1",
+            commandProperties = {
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+            }
+    )
     @GetMapping("/get")
     public Object get() {
         /**
@@ -23,5 +30,7 @@ public class UserController {
         User user = restTemplate.getForEntity("http://eureka-client-provider/user/get?id=1", User.class).getBody();
         return user;
     }
-
+    public Object fallback() {
+        return new User(100, "默认");
+    }
 }

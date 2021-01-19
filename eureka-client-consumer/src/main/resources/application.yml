@@ -11,3 +11,11 @@ eureka:
       default-zone: http://eureka8761:8761/eureka/,http://eureka8762:8762/eureka/
   instance:
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+#hystrix:
+#  command:
+#    getUser:
+#      excution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 3000
+#          strategy: SEMAPHORE

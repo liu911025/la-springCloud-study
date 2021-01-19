@@ -11,6 +11,11 @@ public class UserController {
 
     @GetMapping("get")
     public User getUser(int id) {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new User(id, "yinjihuan");
     }
 

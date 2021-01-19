@@ -21,6 +21,7 @@
         <module>eureka-server</module>
         <module>eureka-client-provider</module>
         <module>eureka-client-consumer</module>
+        <module>eureka-client-api</module>
     </modules>
 
     <properties>

@@ -9,6 +9,11 @@ public class StudentFeignClient implements StudentFeignApi {
 
     @Override
     public String getStudentName(StudentRequest request) {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return request.getName();
     }
 }

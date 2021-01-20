@@ -11,11 +11,34 @@ eureka:
       default-zone: http://eureka8761:8761/eureka/,http://eureka8762:8762/eureka/
   instance:
     instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
-#hystrix:
-#  command:
-#    getUser:
-#      excution:
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 3000
+
+#全局配置, Feign配置会优先
+#ribbon:
+  # 请求连接的超时时间 默认的时间为 1 秒
+#  ConnectTimeout: 15000
+  # 请求处理的超时时间
+#  ReadTimeout: 15000
+
+hystrix:
+  command:
+    default: # 局部配置需改名为对应的服务提供者服务名
+      execution:
+        timeout:
+          # 是否打开超时熔断, enabled 与 feign.hystrix.enabled 同时为true 才走熔断
+          enabled: true
+        isolation:
+          thread:
+            # 请求达到该时间,熔断器生效, ,熔断器时间不能大于连接超时时间,否则会报连接超时异常,不走熔断
+            timeoutInMilliseconds: 8000
+
 #          strategy: SEMAPHORE
+
+#  Feign配置会优先于Ribbon配置。配置完之后也是同样的效果
+feign:
+  hystrix:
+    enabled: true   # 开启 Hystrix 熔断器
+  client:
+    config:
+      default: # 局部配置需改名为对应的服务提供者服务名
+        connect-timeout: 20000
+        read-timeout: 20000

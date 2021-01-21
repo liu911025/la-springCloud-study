@@ -22,6 +22,7 @@
         <module>eureka-client-provider</module>
         <module>eureka-client-consumer</module>
         <module>eureka-client-api</module>
+        <module>zuul</module>
     </modules>
 
     <properties>

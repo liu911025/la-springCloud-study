@@ -9,7 +9,7 @@ public class StudentFeignClient implements StudentFeignApi {
 
     @Override
     public String getStudentName(StudentRequest request) {
-        int i = 3 / 0;
+        //int i = 3 / 0;
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {

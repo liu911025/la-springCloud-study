@@ -1,6 +1,7 @@
 package com.lg.springcloud.study.controller;
 
 import com.lg.springcloud.study.request.StudentRequest;
+import com.lg.springcloud.study.response.RespData;
 import com.lg.springcloud.study.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,11 @@ public class StudentController {
     private IStudentService studentService;
 
     @GetMapping("/getName")
-    public String getStudent() {
+    public RespData<String> getStudent() {
         StudentRequest request = new StudentRequest();
         request.setName("张三");
         request.setAge(18);
-        return studentService.getStudentName(request);
+        return RespData.buildSuccess(studentService.getStudentName(request));
     }
 
 }

@@ -1,0 +1,37 @@
+server:
+  port: 8760
+spring:
+  application:
+    name: zuul-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka8761:8761/eureka/,http://eureka8762:8762/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+zuul:
+  routes:
+    # 固定路由, path为映射; url为路由真正的地址;
+    fixed:
+      path: /ljt/**
+      url: http://localhost:8082/student/getName
+    # 结合eureka配置 规则:网关地址 + 服务名 + 服务接口地址。
+    student: # 此名称自定义
+      path: /api/**
+      serviceId: eureka-client-consumer
+  # 默认采用信号量隔离机制
+  ribbon-isolation-strategy: semaphore
+  # 线程隔离机制
+# ribbon-isolation-strategy: thread
+#  thread-pool:
+    # 线程隔离模式时,默认所有的路由对应的 Command 都在一个线程池中执行,这样达不到隔离的效果,此配置让每个路由都使用独立的线程池
+#    use-separate-thread-pools: true
+    # 为线程池配置对应的前缀
+#    thread-pool-key-prefix: gateway-
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000

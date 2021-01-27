@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: zuul-service
+  servlet:
+    multipart:
+      # 设置单个文件的最大长度
+      max-file-size: 6MB
+      # 设置最大的请求文件的大小
+      max-request-size: 10MB
 
 eureka:
   client:
@@ -31,7 +37,13 @@ zuul:
 #    use-separate-thread-pools: true
     # 为线程池配置对应的前缀
 #    thread-pool-key-prefix: gateway-
-
 ribbon:
   ReadTimeout: 20000
   ConnectTimeout: 20000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 暴露监控的所有端点,* 在YAML中有特殊的含义,需要加上双引号
+        include: "*"

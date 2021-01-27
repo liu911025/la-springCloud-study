@@ -54,7 +54,7 @@ public class MyFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         System.err.println("MyFilter run ...");
         RequestContext context = RequestContext.getCurrentContext();
-
+        context.set("shouldFilter", false);
         return null;
     }
 }

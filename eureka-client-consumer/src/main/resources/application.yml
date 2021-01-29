@@ -10,6 +10,11 @@ spring:
       max-file-size: 6MB
       # 设置最大的请求文件的大小
       max-request-size: 10MB
+  cloud:
+    loadbalancer:
+      retry:
+        # 是否开启重试, 默认开启
+        enabled: true
 
 eureka:
   client:
@@ -48,3 +53,4 @@ feign:
       default: # 局部配置需改名为对应的服务提供者服务名
         connect-timeout: 20000
         read-timeout: 20000
+

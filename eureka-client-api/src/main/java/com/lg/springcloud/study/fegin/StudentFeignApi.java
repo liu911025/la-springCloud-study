@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
  * 发生优先顺序:
  *  统一异常处理 >  fallback = StudentClientFallback.class > fallbackFactory = StudentClientFallbackFactory.class
  */
-@FeignClient(value = "eureka-client-provider", configuration = CustomRequestInterceptor.class,fallback = StudentClientFallback.class, fallbackFactory = StudentClientFallbackFactory.class)
+//@FeignClient(value = "eureka-client-provider", configuration = CustomRequestInterceptor.class,fallback = StudentClientFallback.class, fallbackFactory = StudentClientFallbackFactory.class)
+@FeignClient(value = "eureka-client-provider", configuration = CustomRequestInterceptor.class)
 public interface StudentFeignApi {
 
     @GetMapping("/student/name")

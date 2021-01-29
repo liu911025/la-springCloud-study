@@ -30,8 +30,8 @@ hystrix:
     default: # 局部配置需改名为对应的服务提供者服务名
       execution:
         timeout:
-          # 是否开启熔断超时
-          enabled: true
+          # 是否开启熔断超时 true开启
+          enabled: false
         isolation:
           thread:
             # 请求达到该时间,熔断器生效, ,熔断器时间不能大于连接超时时间,否则会报连接超时异常,不走熔断
@@ -42,7 +42,7 @@ hystrix:
 #  Feign配置会优先于Ribbon配置。配置完之后也是同样的效果
 feign:
   hystrix:
-    enabled: true   # 开启 Hystrix 熔断器
+    enabled: false   # 开启 Hystrix 熔断器
   client:
     config:
       default: # 局部配置需改名为对应的服务提供者服务名
